@@ -1,0 +1,7 @@
+.layout{
+  display: flex;
+  justify-content: space-between;
+  .main{
+    width: calc(100% - 230px);
+  }
+}

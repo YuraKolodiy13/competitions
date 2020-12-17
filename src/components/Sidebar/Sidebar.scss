@@ -1,0 +1,40 @@
+.sidebar{
+  width: 200px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  .MuiTreeItem-root{
+    background-size: 18px 12px;
+    background-position: 20px 5px;
+    background-repeat: no-repeat;
+    .MuiTreeItem-label{
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding-left: 25px;
+    }
+  }
+  li{
+    ul{
+      margin: 0;
+      list-style: none;
+      padding-left: 30px;
+      a{
+        text-decoration: none;
+        color: inherit;
+        transition: .3s;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+    //span{
+    //  width: 20px;
+    //  height: 20px;
+    //  background-size: contain;
+    //  background-position: center;
+    //  background-repeat: no-repeat;
+    //  margin-right: 5px;
+    //}
+  }
+}
