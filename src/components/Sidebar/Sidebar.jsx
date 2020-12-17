@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {getCountriesRequest} from "../../actions/leagues";
+import {getCompetitionsRequest} from "../../actions/leagues";
 import {useDispatch, useSelector} from "react-redux";
 import './Sidebar.scss'
 import {Link} from "react-router-dom";
@@ -12,7 +12,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCountriesRequest());
+    dispatch(getCompetitionsRequest());
   }, []); // eslint-disable-line
 
   const treeTableWrapper = (taskTree) => {

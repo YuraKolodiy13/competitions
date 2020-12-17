@@ -9,7 +9,6 @@ import {
   GET_PLAYER_REQUEST_SUCCESS,
   GET_PLAYER_REQUEST,
   GET_SCHEDULE_REQUEST_SUCCESS,
-  GET_COUNTRIES_REQUEST_SUCCESS,
   GET_TODAYS_MATCHES_REQUEST_SUCCESS,
   GET_TABLE_REQUEST_FAILED,
   GET_TODAYS_MATCHES_REQUEST,
@@ -18,10 +17,14 @@ import {
   GET_HEAD2HEAD_REQUEST_SUCCESS,
   GET_HEAD2HEAD_REQUEST_FAILED,
   GET_TABLE_REQUEST,
-  GET_PLAYER_INFO_REQUEST_SUCCESS, GET_PLAYER_MATCHES_REQUEST_SUCCESS
+  GET_PLAYER_INFO_REQUEST_SUCCESS, GET_PLAYER_MATCHES_REQUEST_SUCCESS, GET_COMPETITIONS_REQUEST_SUCCESS
 } from "../actions/leagues";
 
 const initialState = {
+  competitions: [],
+
+
+
   teams: [],
   team: [],
   teamInfo: {},
@@ -46,6 +49,19 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+
+    case GET_COMPETITIONS_REQUEST_SUCCESS:
+      return {
+        ...state,
+        competitions: action.data
+      };
+
+
+
+
+
+
+
     case GET_TEAMS_REQUEST_SUCCESS:
       return {
         ...state,
@@ -125,13 +141,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         schedule: action.data.data
-      };
-
-    case GET_COUNTRIES_REQUEST_SUCCESS:
-      return {
-        ...state,
-        allLeagues: action.data[0],
-        popularLeagues: action.data[1]
       };
 
     case GET_TODAYS_MATCHES_REQUEST:

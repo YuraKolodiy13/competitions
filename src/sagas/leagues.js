@@ -10,17 +10,24 @@ import {
   getTeamInfoApi,
   getPlayerApi,
   getScheduleApi,
-  getCountriesApi,
   getTodaysMatchesApi,
-  searchUsersApi,
-  getUserRepoApi,
   getScorersApi,
-  getHead2HeadApi, getCountriesBordersApi, parseRssDataApi, getPlayerInfoApi, getPlayerMatchesApi,
+  getHead2HeadApi, getPlayerInfoApi, getPlayerMatchesApi, getCompetitionsApi,
 } from "../requests/leagues";
 
-const leagues_ids = [2020, 2009, 2035, 2040, 2047, 2049, 2050, 2016, 2021, 2057, 2146, 2018, 2001, 2007, 2031, 2015, 2002,
-  2004, 2131, 2128, 2127, 2125, 2019, 2121, 2116, 2115, 2114, 2003, 2107, 2105, 2100, 2017, 2095, 2094, 2137, 2084, 2014, 2077,
-  2073, 2071, 2070, 2064, 2060];
+
+export function* getCompetitions() {
+  try {
+    const response = yield call(getCompetitionsApi);
+    yield put({type: leaguesActions.GET_COMPETITIONS_REQUEST_SUCCESS, data: response.data});
+  } catch (e) {
+    yield put({ type: leaguesActions.GET_COMPETITIONS_REQUEST_FAILED, error: e.response });
+  }
+}
+
+
+
+
 
 export function* getTeams() {
   try {
@@ -123,24 +130,6 @@ export function* getSchedule(action) {
   }
 }
 
-export function* getCountries() {
-  try {
-    const response = yield call(getCountriesApi);
-    const countries = {};
-    response.data.data.map((item) => {
-      if(!leagues_ids.includes(item.id)) return null;
-      if(countries[item.area.id]){
-        countries[item.area.id] = [...countries[item.area.id], item];
-      }else{
-        countries[item.area.id] = [item];
-      }
-      return null;
-    });
-    yield put({type: leaguesActions.GET_COUNTRIES_REQUEST_SUCCESS, data: [response.data.data, Object.values(countries)]});
-  } catch (e) {
-    yield put({ type: leaguesActions.GET_COUNTRIES_REQUEST_FAILED, error: e.response });
-  }
-}
 
 export function* getTodaysMatches(action) {
   try {
@@ -191,6 +180,9 @@ export function* getHead2Head(action) {
 
 
 export default all([
+  takeEvery(leaguesActions.GET_COMPETITIONS_REQUEST, getCompetitions),
+
+
   takeEvery(leaguesActions.GET_TEAMS_REQUEST, getTeams),
   takeEvery(leaguesActions.GET_TEAM_REQUEST, getTeam),
   takeEvery(leaguesActions.GET_TEAM_INFO_REQUEST, getTeamInfo),
@@ -201,7 +193,6 @@ export default all([
   takeEvery(leaguesActions.GET_TEAM_NEXT_SCHEDULE_REQUEST, getTeamNextSchedule),
   takeEvery(leaguesActions.GET_TEAM_PREV_SCHEDULE_REQUEST, getTeamPrevSchedule),
   takeEvery(leaguesActions.GET_SCHEDULE_REQUEST, getSchedule),
-  takeEvery(leaguesActions.GET_COUNTRIES_REQUEST, getCountries),
   takeEvery(leaguesActions.GET_TODAYS_MATCHES_REQUEST, getTodaysMatches),
   takeEvery(leaguesActions.GET_SCORERS_REQUEST, getScorers),
   takeEvery(leaguesActions.GET_HEAD2HEAD_REQUEST, getHead2Head),

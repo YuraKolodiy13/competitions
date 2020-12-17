@@ -1,5 +1,15 @@
 import {defaultActionCreator} from "./actionCreator";
 
+export const GET_COMPETITIONS_REQUEST = 'GET_COMPETITIONS_REQUEST';
+export const GET_COMPETITIONS_REQUEST_SUCCESS = 'GET_COMPETITIONS_REQUEST_SUCCESS';
+export const GET_COMPETITIONS_REQUEST_FAILED = 'GET_COMPETITIONS_REQUEST_FAILED';
+export const getCompetitionsRequest = defaultActionCreator(GET_COMPETITIONS_REQUEST, 'data');
+
+
+
+
+
+
 export const GET_TEAMS_REQUEST = 'GET_TEAMS_REQUEST';
 export const GET_TEAMS_REQUEST_SUCCESS = 'GET_TEAMS_REQUEST_SUCCESS';
 export const GET_TEAMS_REQUEST_FAILED = 'GET_TEAMS_REQUEST_FAILED';
@@ -79,14 +89,6 @@ export const GET_SCHEDULE_REQUEST_FAILED = 'GET_SCHEDULE_REQUEST_FAILED';
 export const getScheduleRequest = defaultActionCreator(GET_SCHEDULE_REQUEST, 'data');
 export const getScheduleRequestSuccess = defaultActionCreator(GET_SCHEDULE_REQUEST_SUCCESS, 'data');
 export const getScheduleRequestFailed = defaultActionCreator(GET_SCHEDULE_REQUEST_FAILED, 'error');
-
-export const GET_COUNTRIES_REQUEST = 'GET_COUNTRIES_REQUEST';
-export const GET_COUNTRIES_REQUEST_SUCCESS = 'GET_COUNTRIES_REQUEST_SUCCESS';
-export const GET_COUNTRIES_REQUEST_FAILED = 'GET_COUNTRIES_REQUEST_FAILED';
-
-export const getCountriesRequest = defaultActionCreator(GET_COUNTRIES_REQUEST, 'data');
-export const getCountriesRequestSuccess = defaultActionCreator(GET_COUNTRIES_REQUEST_SUCCESS, 'data');
-export const getCountriesRequestFailed = defaultActionCreator(GET_COUNTRIES_REQUEST_FAILED, 'error');
 
 export const GET_TODAYS_MATCHES_REQUEST = 'GET_TODAYS_MATCHES_REQUEST';
 export const GET_TODAYS_MATCHES_REQUEST_SUCCESS = 'GET_TODAYS_MATCHES_REQUEST_SUCCESS';

@@ -10,6 +10,7 @@ const App = () => {
     <div className="App container">
       <Layout>
         <Switch>
+          <Route path="/" component={League} />
           <Route path="/league/:id" component={League} />
           <Route path="/team/:id" component={Team} />
           <Route path="/player/:id" component={Player} />
