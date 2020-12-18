@@ -1,0 +1,1 @@
+export const API_URL = 'https://pustomyty-minifootball-api.herokuapp.com/api';

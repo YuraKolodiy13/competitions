@@ -53,7 +53,7 @@ export default function reducer(state = initialState, action) {
     case GET_COMPETITIONS_REQUEST_SUCCESS:
       return {
         ...state,
-        competitions: action.data
+        competitions: action.data.data
       };
 
 

@@ -8,7 +8,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 
 const Sidebar = () => {
 
-  const popularLeagues = useSelector(state => state.leagues.popularLeagues);
+  const competitions = useSelector(state => state.leagues.competitions);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,10 +19,11 @@ const Sidebar = () => {
     return taskTree && taskTree.map((item, index) => {
       return (
         <Fragment key={index}>
+          {console.log(item, 'item')}
           <TreeItem
             nodeId={index.toString()}
-            label={item.length < 2 ? <Link to={`/league/${item[0].id}`}>{item[0].area.name}</Link> : item[0].area.name}
-            style={{backgroundImage: `url(${item[0].area.ensignUrl})`}}
+            label={<Link to={`/league/${item._id}`}>{item.name}</Link>}
+            style={{backgroundImage: `url(${item.logo})`}}
           >
             {item.length > 1 && treeTable(item)}
           </TreeItem>
@@ -34,7 +35,7 @@ const Sidebar = () => {
   const treeTable = (taskTree) => {
     return taskTree && taskTree.map(league => {
       return (
-        <li key={league.id}>{row(league)}</li>
+        <li key={league._id}>{row(league)}</li>
       )
     });
   };
@@ -42,7 +43,7 @@ const Sidebar = () => {
 
   const row = (league) => {
     return (
-      <Link to={`/league/${league.id}`}>{league.name}</Link>
+      <Link to={`/league/${league._id}`}>{league.name}</Link>
     )
   };
 
@@ -53,7 +54,7 @@ const Sidebar = () => {
       defaultCollapseIcon={<span className='arrow'/>}
       defaultExpandIcon={<span className='arrow'/>}
       multiSelect
-    >{treeTableWrapper(popularLeagues)}</TreeView>
+    >{treeTableWrapper(competitions)}</TreeView>
   )
 };
 

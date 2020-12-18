@@ -1,6 +1,5 @@
 import service from './service';
-
-const API_URL = 'https://pustomyty-minifootball-api.herokuapp.com/api';
+import {API_URL} from "../helpers/constants";
 
 
 export const getCompetitionsApi = () => {

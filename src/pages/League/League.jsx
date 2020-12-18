@@ -20,8 +20,8 @@ const League = (props) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    dispatch(getTableRequest(props.match.params.id));
-    dispatch(getScorersRequest(props.match.params.id));
+    // dispatch(getTableRequest(props.match.params.id));
+    // dispatch(getScorersRequest(props.match.params.id));
   }, [props.match.params.id]); // eslint-disable-line
 
   const data = {
@@ -69,12 +69,6 @@ const League = (props) => {
 
   return (
     <div className='home'>
-      <ul className='breadcrumbs'>
-        <li><Link to='/'>Home</Link></li>
-        {!!schedule.length && (
-          <li>{schedule[0].competition.name}</li>
-        )}
-      </ul>
 
       {loading
         ? <Loader/>

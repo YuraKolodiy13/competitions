@@ -4,10 +4,12 @@ import Team from "./pages/Team/Team";
 import League from "./pages/League/League";
 import Player from "./pages/Player/Player";
 import Layout from "./layout/Layout";
+import Header from "./components/Header/Header";
 
 const App = () => {
   return (
     <div className="App container">
+      <Header/>
       <Layout>
         <Switch>
           <Route path="/" component={League} />
