@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {loginRequest, resetErrors} from "../../../../actions/auth";
+import {registerRequest, resetErrors} from "../../../../actions/auth";
 import {useHistory} from "react-router-dom";
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import Modal from "@material-ui/core/Modal";
@@ -15,7 +15,7 @@ const RegisterModal = ({open, setIsModalOpen}) => {
   const history = useHistory();
 
   const [state, setState] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
@@ -25,7 +25,7 @@ const RegisterModal = ({open, setIsModalOpen}) => {
   }, [admin, history]);
 
   const submitLogin = () => {
-    dispatch(loginRequest(state))
+    dispatch(registerRequest(state, closeModal))
   };
 
   const submitLoginError = () => {
@@ -39,7 +39,7 @@ const RegisterModal = ({open, setIsModalOpen}) => {
   const closeModal = () => {
     setIsModalOpen(false);
     setState({
-      username: '',
+      name: '',
       email: '',
       password: ''
     })
@@ -63,8 +63,8 @@ const RegisterModal = ({open, setIsModalOpen}) => {
           <ValidatorForm onSubmit={submitLogin} onError={submitLoginError} className='login__form'>
             <div className="login__field modal__field">
               <TextValidator
-                value={state.username}
-                name='username'
+                value={state.name}
+                name='name'
                 type="text"
                 label="Ім'я"
                 variant="outlined"

@@ -23,7 +23,7 @@ const Sidebar = () => {
           <TreeItem
             nodeId={index.toString()}
             label={<Link to={`/league/${item._id}`}>{item.name}</Link>}
-            style={{backgroundImage: `url(${item.logo})`}}
+            // style={{backgroundImage: `url(${item.logo})`}}
           >
             {item.length > 1 && treeTable(item)}
           </TreeItem>

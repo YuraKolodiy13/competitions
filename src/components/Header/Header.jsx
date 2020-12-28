@@ -3,11 +3,15 @@ import './Header.scss'
 import {NavLink} from  'react-router-dom'
 import LoginModal from "../modals/Auth/LoginModal/LoginModal";
 import RegisterModal from "../modals/Auth/RegisterModal/RegisterModal";
+import {useSelector} from "react-redux";
+import jwt_decode from "jwt-decode";
 
-const Header = props => {
+const Header = () => {
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const token = useSelector(state => state.auth.token);
+  const user =  token ? jwt_decode(token) : null;
 
   return (
     <>
@@ -17,13 +21,13 @@ const Header = props => {
             <NavLink to='/' exact>Змагання</NavLink>
           </h1>
 
-          {props.user
+          {user
             ? <ul>
               <li>
-                <NavLink to={`/user/${props.user.id}`}>{props.user.name}</NavLink>
+                <NavLink to={`/user/${user._id}`}>{user.name}</NavLink>
               </li>
               <li>
-                <span onClick={props.logout}>Logout</span>
+                <span>Logout</span>
               </li>
             </ul>
             : <ul>

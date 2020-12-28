@@ -24,7 +24,7 @@ const LoginModal = ({open, setIsModalOpen}) => {
   }, [admin, history]);
 
   const submitLogin = () => {
-    dispatch(loginRequest(state))
+    dispatch(loginRequest(state, closeModal));
   };
 
   const submitLoginError = () => {
