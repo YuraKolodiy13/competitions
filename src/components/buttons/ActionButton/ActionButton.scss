@@ -1,0 +1,22 @@
+.actionButton{
+  width: 48px;
+  height: 36px;
+  background-color: var(--color-primary-500);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .3s;
+  &:hover{
+    opacity: .85;
+  }
+}
+.actionButton-wrap{
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: -18px;
+  opacity: 0;
+  transition: .3s;
+  z-index: 5;
+}

@@ -5,18 +5,17 @@ export const GET_COMPETITIONS_REQUEST_SUCCESS = 'GET_COMPETITIONS_REQUEST_SUCCES
 export const GET_COMPETITIONS_REQUEST_FAILED = 'GET_COMPETITIONS_REQUEST_FAILED';
 export const getCompetitionsRequest = defaultActionCreator(GET_COMPETITIONS_REQUEST, 'data');
 
-
-
-
-
-
 export const GET_TEAMS_REQUEST = 'GET_TEAMS_REQUEST';
 export const GET_TEAMS_REQUEST_SUCCESS = 'GET_TEAMS_REQUEST_SUCCESS';
 export const GET_TEAMS_REQUEST_FAILED = 'GET_TEAMS_REQUEST_FAILED';
-
 export const getTeamsRequest = defaultActionCreator(GET_TEAMS_REQUEST, 'data');
-export const getTeamsRequestSuccess = defaultActionCreator(GET_TEAMS_REQUEST_SUCCESS, 'data');
-export const getTeamsRequestFailed = defaultActionCreator(GET_TEAMS_REQUEST_FAILED, 'error');
+
+export const ADD_TEAM_REQUEST = 'ADD_TEAM_REQUEST';
+export const ADD_TEAM_REQUEST_SUCCESS = 'ADD_TEAM_REQUEST_SUCCESS';
+export const ADD_TEAM_REQUEST_FAILED = 'ADD_TEAM_REQUEST_FAILED';
+export const addTeamRequest = defaultActionCreator(ADD_TEAM_REQUEST, 'data', 'callback');
+
+
 
 export const GET_TEAM_REQUEST = 'GET_TEAM_REQUEST';
 export const GET_TEAM_REQUEST_SUCCESS = 'GET_TEAM_REQUEST_SUCCESS';

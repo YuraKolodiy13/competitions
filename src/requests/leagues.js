@@ -8,13 +8,22 @@ export const getCompetitionsApi = () => {
   )
 };
 
-
-
 export const getTeamsApi = () => {
   return service.get(
-    `${API_URL}fd/competitions/2021/teams`,
+    `/api/teams`,
   )
 };
+
+export const addTeamApi = (data) => {
+  return service.post(
+    `/api/teams`, data
+  )
+};
+
+
+
+
+
 
 export const getTeamApi = (team_id) => {
   return service.get(

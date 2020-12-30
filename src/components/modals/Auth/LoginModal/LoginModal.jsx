@@ -46,7 +46,7 @@ const LoginModal = ({open, setIsModalOpen}) => {
 
   return (
     <Modal
-      className='modal modal-wide'
+      className='modal'
       open={open}
       onClose={closeModal}
       closeAfterTransition
@@ -57,31 +57,35 @@ const LoginModal = ({open, setIsModalOpen}) => {
     >
       <Slide direction="down" in={open}>
         <div className='modal__content'>
-          <h2 className="heading">Вхід до системи</h2>
+          <h3 className="heading">Вхід до системи</h3>
           <ValidatorForm onSubmit={submitLogin} onError={submitLoginError} className='login__form'>
-            <div className="login__field modal__field">
-              <TextValidator
-                value={state.email}
-                name='email'
-                type="email"
-                label='Email'
-                variant="outlined"
-                onChange={onHandleChange}
-                validators={['required']}
-                errorMessages={['Обовязкове поле']}
-              />
+            <div className="modal__row">
+              <div className="login__field modal__field w100">
+                <TextValidator
+                  value={state.email}
+                  name='email'
+                  type="email"
+                  label='Email'
+                  variant="outlined"
+                  onChange={onHandleChange}
+                  validators={['required']}
+                  errorMessages={['Обовязкове поле']}
+                />
+              </div>
             </div>
-            <div className="login__field modal__field">
-              <TextValidator
-                value={state.password}
-                name='password'
-                type='password'
-                label='Пароль'
-                variant="outlined"
-                onChange={onHandleChange}
-                validators={['required']}
-                errorMessages={['Обовязкове поле']}
-              />
+            <div className="modal__row">
+              <div className="login__field modal__field w100">
+                <TextValidator
+                  value={state.password}
+                  name='password'
+                  type='password'
+                  label='Пароль'
+                  variant="outlined"
+                  onChange={onHandleChange}
+                  validators={['required']}
+                  errorMessages={['Обовязкове поле']}
+                />
+              </div>
             </div>
             <Button
               variant="contained"

@@ -21,6 +21,12 @@ const Header = () => {
             <NavLink to='/' exact>Змагання</NavLink>
           </h1>
 
+          <ul>
+            <li>
+              <NavLink to={'/teams'}>Команди</NavLink>
+            </li>
+          </ul>
+
           {user
             ? <ul>
               <li>
