@@ -4,19 +4,19 @@ import {API_URL} from "../helpers/constants";
 
 export const getCompetitionsApi = () => {
   return service.get(
-    `/api/competitions`,
+    `${API_URL}/competitions`,
   )
 };
 
 export const getTeamsApi = () => {
   return service.get(
-    `/api/teams`,
+    `${API_URL}/teams`,
   )
 };
 
 export const addTeamApi = (data) => {
   return service.post(
-    `/api/teams`, data
+    `${API_URL}/teams`, data
   )
 };
 
