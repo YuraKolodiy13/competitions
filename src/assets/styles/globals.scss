@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   padding: 20px 0;
   @media (max-width: 479px) {
     background-color: var(--color-neutrals-0);
@@ -124,82 +124,8 @@ body {
   .MuiMenuItem-root,
   .MuiTooltip-tooltip,
   .MuiTypography-body1{
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-transform: none;
-  }
-
-  
-
-  .implementation_not_started{
-    background-color: var(--color-neutrals-300);
-    color: var(--color-primary-500);
-  }
-  .early_implementation{
-    background-color: var(--color-success-100);
-    color: var(--color-primary-500);
-  }
-  .advanced_implementation{
-    background-color: var(--color-success-200);
-    color: var(--color-primary-500);
-  }
-  .perfect_execution{
-    background-color: var(--color-success-300);
-    color: var(--color-primary-500);
-  }
-  .critical_discrepancy{
-    background-color: var(--color-error-100);
-    color: var(--color-primary-500);
-  }
-
-  .execution-0,
-  .execution-n_a{
-    background-color: var(--color-neutrals-100);
-  }
-  .execution-1{
-    background-color: var(--color-success-100);
-  }
-  .execution-2{
-    background-color: var(--color-success-150);
-  }
-  .execution-3{
-    background-color: var(--color-success-200);
-  }
-  .execution-4{
-    background-color: var(--color-success-250);
-  }
-  .execution-5{
-    background-color: var(--color-success-300);
-  }
-
-  .stages-list{
-    .stages-item{
-      padding-left: 20px;
-      position: relative;
-      &::before{
-        content: '';
-        width: 12px;
-        height: 12px;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-    .stages-item-0::before{
-      background-color: var(--color-neutrals-300);
-    }
-    .stages-item-1::before{
-      background-color: var(--color-success-250);
-    }
-    .stages-item-2::before{
-      background-color: var(--color-success-400);
-    }
-    .stages-item-3::before{
-      background-color: var(--color-success-500);
-    }
-    .stages-item-4::before{
-      background-color: var(--color-error-400);
-    }
   }
 
   .heading-wrap{

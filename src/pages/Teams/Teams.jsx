@@ -24,7 +24,6 @@ const Teams = () => {
   return (
     <div className='teams'>
       <Button
-        withAddIcon
         type='button'
         title='Добавити команду'
         color='primary'

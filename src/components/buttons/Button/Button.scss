@@ -26,26 +26,4 @@
     border-color: var(--color-neutrals-400);
     color: var(--color-primary-500);
   }
-  .addIcon{
-    position: relative;
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
-    margin-right: 17px;
-    margin-left: 5px;
-    &::before,
-    &::after {
-      content: '';
-      width: 14px;
-      height: 2px;
-      background-color: var(--color-neutrals-0);
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    &::after{
-      transform: translate(-50%, -50%) rotate(90deg);
-    }
-  }
 }

@@ -1,22 +1,23 @@
 import service from './service';
 import {API_URL} from "../helpers/constants";
 
+const api = API_URL;
 
 export const getCompetitionsApi = () => {
   return service.get(
-    `${API_URL}/competitions`,
+    `${api}/competitions`,
   )
 };
 
 export const getTeamsApi = () => {
   return service.get(
-    `${API_URL}/teams`,
+    `${api}/teams`,
   )
 };
 
 export const addTeamApi = (data) => {
   return service.post(
-    `${API_URL}/teams`, data
+    `${api}/teams`, data
   )
 };
 
