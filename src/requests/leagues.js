@@ -1,7 +1,7 @@
 import service from './service';
 import {API_URL} from "../helpers/constants";
 
-const api = API_URL;
+const api = '/api';
 
 export const getCompetitionsApi = () => {
   return service.get(
