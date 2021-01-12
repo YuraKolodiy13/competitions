@@ -1,1 +1,1 @@
-export const API_URL = 'https://pustomyty-minifootball-api.herokuapp.com/api';
+export const API_URL = 'https://competitions-api.herokuapp.com/api';

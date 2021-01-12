@@ -7,6 +7,7 @@ import Layout from "./layout/Layout";
 import Header from "./components/Header/Header";
 import Teams from "./pages/Teams/Teams";
 import './assets/styles/globals.scss'
+import Group from "./pages/League/Group/Group";
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
       <Layout>
         <Switch>
           <Route path="/" component={League} exact/>
-          <Route path="/league/:id" component={League} />
+          <Route path="/league/:id" component={League} exact />
+          <Route path="/league/:id/groups/:id" component={Group} />
           <Route path="/teams" component={Teams} />
           <Route path="/team/:id" component={Team} />
           <Route path="/player/:id" component={Player} />

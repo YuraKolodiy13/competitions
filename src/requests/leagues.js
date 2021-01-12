@@ -1,7 +1,7 @@
 import service from './service';
 import {API_URL} from "../helpers/constants";
 
-const api = '/api';
+const api = API_URL;
 
 export const getCompetitionsApi = () => {
   return service.get(
@@ -21,6 +21,17 @@ export const addTeamApi = (data) => {
   )
 };
 
+export const getCompetitionApi = (id) => {
+  return service.get(
+    `${api}/competitions/${id}`,
+  )
+};
+
+export const getGroupApi = (id) => {
+  return service.get(
+    `${api}/competitions/${id}/groups/${id}`,
+  )
+};
 
 
 

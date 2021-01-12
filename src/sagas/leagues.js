@@ -12,7 +12,7 @@ import {
   getScheduleApi,
   getTodaysMatchesApi,
   getScorersApi,
-  getHead2HeadApi, getPlayerInfoApi, getPlayerMatchesApi, getCompetitionsApi, addTeamApi,
+  getHead2HeadApi, getPlayerInfoApi, getPlayerMatchesApi, getCompetitionsApi, addTeamApi, getCompetitionApi,
 } from "../requests/leagues";
 
 
@@ -43,6 +43,14 @@ export function* addTeam(action) {
   }
 }
 
+export function* getCompetition(action) {
+  try {
+    const response = yield call(getCompetitionApi, action.data);
+    yield put({type: leaguesActions.GET_COMPETITION_REQUEST_SUCCESS, data: response.data});
+  } catch (e) {
+    yield put({ type: leaguesActions.GET_COMPETITION_REQUEST_FAILED, error: e.response });
+  }
+}
 
 
 
@@ -191,6 +199,7 @@ export function* getHead2Head(action) {
 export default all([
   takeEvery(leaguesActions.GET_COMPETITIONS_REQUEST, getCompetitions),
   takeEvery(leaguesActions.ADD_TEAM_REQUEST, addTeam),
+  takeEvery(leaguesActions.GET_COMPETITION_REQUEST, getCompetition),
 
 
   takeEvery(leaguesActions.GET_TEAMS_REQUEST, getTeams),

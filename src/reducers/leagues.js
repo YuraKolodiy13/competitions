@@ -17,11 +17,15 @@ import {
   GET_HEAD2HEAD_REQUEST_SUCCESS,
   GET_HEAD2HEAD_REQUEST_FAILED,
   GET_TABLE_REQUEST,
-  GET_PLAYER_INFO_REQUEST_SUCCESS, GET_PLAYER_MATCHES_REQUEST_SUCCESS, GET_COMPETITIONS_REQUEST_SUCCESS
+  GET_PLAYER_INFO_REQUEST_SUCCESS,
+  GET_PLAYER_MATCHES_REQUEST_SUCCESS,
+  GET_COMPETITIONS_REQUEST_SUCCESS,
+  GET_COMPETITION_REQUEST_SUCCESS
 } from "../actions/leagues";
 
 const initialState = {
   competitions: [],
+  competition: {},
 
 
 
@@ -54,6 +58,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         competitions: action.data.data
+      };
+    case GET_COMPETITION_REQUEST_SUCCESS:
+      return {
+        ...state,
+        competition: action.data.data
       };
 
 

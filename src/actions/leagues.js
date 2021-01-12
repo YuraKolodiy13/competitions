@@ -15,6 +15,19 @@ export const ADD_TEAM_REQUEST_SUCCESS = 'ADD_TEAM_REQUEST_SUCCESS';
 export const ADD_TEAM_REQUEST_FAILED = 'ADD_TEAM_REQUEST_FAILED';
 export const addTeamRequest = defaultActionCreator(ADD_TEAM_REQUEST, 'data', 'callback');
 
+export const GET_COMPETITION_REQUEST = 'GET_COMPETITION_REQUEST';
+export const GET_COMPETITION_REQUEST_SUCCESS = 'GET_COMPETITION_REQUEST_SUCCESS';
+export const GET_COMPETITION_REQUEST_FAILED = 'GET_COMPETITION_REQUEST_FAILED';
+export const getCompetitionRequest = defaultActionCreator(GET_COMPETITION_REQUEST, 'data');
+
+export const GET_GROUP_REQUEST = 'GET_GROUP_REQUEST';
+export const GET_GROUP_REQUEST_SUCCESS = 'GET_GROUP_REQUEST_SUCCESS';
+export const GET_GROUP_REQUEST_FAILED = 'GET_GROUP_REQUEST_FAILED';
+export const getGroupRequest = defaultActionCreator(GET_GROUP_REQUEST, 'data');
+
+
+
+
 
 
 export const GET_TEAM_REQUEST = 'GET_TEAM_REQUEST';
