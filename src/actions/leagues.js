@@ -25,6 +25,11 @@ export const GET_GROUP_REQUEST_SUCCESS = 'GET_GROUP_REQUEST_SUCCESS';
 export const GET_GROUP_REQUEST_FAILED = 'GET_GROUP_REQUEST_FAILED';
 export const getGroupRequest = defaultActionCreator(GET_GROUP_REQUEST, 'data');
 
+export const GET_GROUP_TABLE_REQUEST = 'GET_GROUP_TABLE_REQUEST';
+export const GET_GROUP_TABLE_REQUEST_SUCCESS = 'GET_GROUP_TABLE_REQUEST_SUCCESS';
+export const GET_GROUP_TABLE_REQUEST_FAILED = 'GET_GROUP_TABLE_REQUEST_FAILED';
+export const getGroupTableRequest = defaultActionCreator(GET_GROUP_TABLE_REQUEST, 'data');
+
 
 
 

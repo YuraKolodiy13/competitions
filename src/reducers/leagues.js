@@ -1,5 +1,6 @@
 import {
-  GET_TABLE_REQUEST_SUCCESS,
+  GET_GROUP_TABLE_REQUEST_SUCCESS,
+  GET_GROUP_TABLE_REQUEST_FAILED,
   GET_TEAM_REQUEST_SUCCESS,
   GET_TEAM_NEXT_SCHEDULE_REQUEST_SUCCESS,
   GET_TEAMS_REQUEST_SUCCESS,
@@ -10,30 +11,29 @@ import {
   GET_PLAYER_REQUEST,
   GET_SCHEDULE_REQUEST_SUCCESS,
   GET_TODAYS_MATCHES_REQUEST_SUCCESS,
-  GET_TABLE_REQUEST_FAILED,
   GET_TODAYS_MATCHES_REQUEST,
   GET_SCORERS_REQUEST_SUCCESS,
   GET_SCORERS_REQUEST_FAILED,
   GET_HEAD2HEAD_REQUEST_SUCCESS,
   GET_HEAD2HEAD_REQUEST_FAILED,
-  GET_TABLE_REQUEST,
+  GET_GROUP_TABLE_REQUEST,
   GET_PLAYER_INFO_REQUEST_SUCCESS,
   GET_PLAYER_MATCHES_REQUEST_SUCCESS,
   GET_COMPETITIONS_REQUEST_SUCCESS,
-  GET_COMPETITION_REQUEST_SUCCESS
+  GET_COMPETITION_REQUEST_SUCCESS, GET_GROUP_REQUEST_SUCCESS
 } from "../actions/leagues";
 
 const initialState = {
   competitions: [],
   competition: {},
-
+  group: {},
+  table: [],
 
 
   teams: [],
   team: [],
   teamInfo: {},
   teamRssNews: {},
-  table: [],
   schedule: [],
   teamNextEvents: [],
   teamPrevEvents: [],
@@ -64,7 +64,27 @@ export default function reducer(state = initialState, action) {
         ...state,
         competition: action.data.data
       };
-
+    case GET_GROUP_REQUEST_SUCCESS:
+      return {
+        ...state,
+        group: action.data.data
+      };
+    case GET_GROUP_TABLE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_GROUP_TABLE_REQUEST_SUCCESS:
+      return {
+        ...state,
+        table: action.data.data,
+        loading: false
+      };
+    case GET_GROUP_TABLE_REQUEST_FAILED:
+      return {
+        ...state,
+        table: []
+      };
 
 
 
@@ -97,7 +117,6 @@ export default function reducer(state = initialState, action) {
       };
 
     case GET_PLAYER_REQUEST:
-    case GET_TABLE_REQUEST:
       return {
         ...state,
         loading: true
@@ -120,18 +139,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         playerInfo: action.data.player ? action.data.player[0] : {},
-      };
-
-    case GET_TABLE_REQUEST_SUCCESS:
-      return {
-        ...state,
-        table: action.data.data,
-        loading: false
-      };
-    case GET_TABLE_REQUEST_FAILED:
-      return {
-        ...state,
-        table: []
       };
 
     case GET_TEAM_NEXT_SCHEDULE_REQUEST_SUCCESS:

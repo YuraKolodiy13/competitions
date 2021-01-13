@@ -27,9 +27,15 @@ export const getCompetitionApi = (id) => {
   )
 };
 
-export const getGroupApi = (id) => {
+export const getGroupApi = ({leagueId, groupId}) => {
   return service.get(
-    `${api}/competitions/${id}/groups/${id}`,
+    `${api}/competitions/${leagueId}/groups/${groupId}`,
+  )
+};
+
+export const getGroupTableApi = ({leagueId, groupId}) => {
+  return service.get(
+    `${api}/competitions/${leagueId}/groups/${groupId}/tables`,
   )
 };
 

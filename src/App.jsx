@@ -17,7 +17,7 @@ const App = () => {
         <Switch>
           <Route path="/" component={League} exact/>
           <Route path="/league/:id" component={League} exact />
-          <Route path="/league/:id/groups/:id" component={Group} />
+          <Route path="/league/:leagueId/groups/:id" component={Group} />
           <Route path="/teams" component={Teams} />
           <Route path="/team/:id" component={Team} />
           <Route path="/player/:id" component={Player} />

@@ -15,9 +15,9 @@ const Matches = ({matches, visibleMatches}) => {
     <div className='matches'>
       <ul>
         {matches.slice(0, visible).map((row) => (
-          <li key={row.id} className='match' onClick={() => viewMatch(row)}>
+          <li key={row._id} className='match' onClick={() => viewMatch(row)}>
               <span className='matchTime'>
-                {new Date(row.utcDate + '').toLocaleDateString('uk', {
+                {new Date(row.startDate + '').toLocaleDateString('uk', {
                   month: 'numeric',
                   day: 'numeric',
                   hour12 : false,
@@ -26,11 +26,11 @@ const Matches = ({matches, visibleMatches}) => {
                 })}
               </span>
             {/*<span>{row.status}</span>*/}
-            <span className='team'>{row.homeTeam.name}</span>
+            <span className='team'>{row.name}</span>
             <span className='scores'>
-              <span>{row.score.fullTime.homeTeam} </span>-<span> {row.score.fullTime.awayTeam}</span>
+              <span>{row.fullTime.homeTeam} </span>-<span> {row.fullTime.awayTeam}</span>
             </span>
-            <span className='team team-right'>{row.awayTeam.name}</span>
+            <span className='team team-right'>{row.name}</span>
           </li>
         ))}
       </ul>
