@@ -21,6 +21,11 @@ export const addTeamApi = (data) => {
   )
 };
 
+export const addCompetitionApi = (data) => {
+  return service.post(
+    `${api}/competitions`, data
+  )
+};
 export const getCompetitionApi = (id) => {
   return service.get(
     `${api}/competitions/${id}`,

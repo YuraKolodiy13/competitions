@@ -1,15 +1,19 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {getCompetitionsRequest, removeCompetitionRequest} from "../../actions/leagues";
 import {useDispatch, useSelector} from "react-redux";
 import './Sidebar.scss'
 import {Link} from "react-router-dom";
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
+import Button from "../buttons/Button/Button";
+import CompetitionModal from "../modals/CompetitionModal/CompetitionModal";
 
 const Sidebar = () => {
 
   const competitions = useSelector(state => state.leagues.competitions);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getCompetitionsRequest());
@@ -58,12 +62,29 @@ const Sidebar = () => {
 
 
   return (
-    <TreeView
-      className='sidebar'
-      defaultCollapseIcon={<span className='arrow'/>}
-      defaultExpandIcon={<span className='arrow'/>}
-      multiSelect
-    >{treeTableWrapper(competitions)}</TreeView>
+    <div>
+      <TreeView
+        className='sidebar'
+        defaultCollapseIcon={<span className='arrow'/>}
+        defaultExpandIcon={<span className='arrow'/>}
+        multiSelect
+      >{treeTableWrapper(competitions)}</TreeView>
+
+      {user && user.role === 'admin' && (
+        <Button
+          type='button'
+          title='Добавити змагання'
+          color='primary'
+          doAction={() => setIsModalOpen(true)}
+        />
+      )}
+
+      <CompetitionModal
+        title='Нове змагання'
+        open={isModalOpen}
+        setIsModalOpen={() => setIsModalOpen(false)}
+      />
+    </div>
   )
 };
 
