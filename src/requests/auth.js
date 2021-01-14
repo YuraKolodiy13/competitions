@@ -1,7 +1,7 @@
 import service from './service';
 import {API_URL} from "../helpers/constants";
 
-const api = '/api';
+const api = API_URL;
 
 export const doLoginApi = data => {
   return service.post(

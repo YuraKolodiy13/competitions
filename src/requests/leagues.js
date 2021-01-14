@@ -26,6 +26,11 @@ export const getCompetitionApi = (id) => {
     `${api}/competitions/${id}`,
   )
 };
+export const removeCompetitionApi = (id) => {
+  return service.delete(
+    `${api}/competitions/${id}`,
+  )
+};
 
 export const getGroupApi = ({leagueId, groupId}) => {
   return service.get(

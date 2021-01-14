@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {getCompetitionsRequest} from "../../actions/leagues";
+import {getCompetitionsRequest, removeCompetitionRequest} from "../../actions/leagues";
 import {useDispatch, useSelector} from "react-redux";
 import './Sidebar.scss'
 import {Link} from "react-router-dom";
@@ -15,14 +15,23 @@ const Sidebar = () => {
     dispatch(getCompetitionsRequest());
   }, []); // eslint-disable-line
 
+  const removeCompetition = (e, id) => {
+    e.preventDefault();
+    dispatch(removeCompetitionRequest(id))
+  };
+
   const treeTableWrapper = (taskTree) => {
     return taskTree && taskTree.map((item, index) => {
       return (
-        <Fragment key={index}>
-          {console.log(item, 'item')}
+        <Fragment key={item._id}>
           <TreeItem
             nodeId={index.toString()}
-            label={<Link to={`/league/${item._id}`}>{item.name}</Link>}
+            label={
+              <div>
+                <Link to={`/league/${item._id}`}>{item.name}</Link>
+                <span onClick={(e) => removeCompetition(e, item._id)}> x</span>
+              </div>
+            }
             // style={{backgroundImage: `url(${item.logo})`}}
           >
             {item.length > 1 && treeTable(item)}

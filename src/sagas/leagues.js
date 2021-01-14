@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects'
+import { all, call, put, takeEvery, select } from 'redux-saga/effects'
 
 import * as leaguesActions from '../actions/leagues'
 import {
@@ -19,7 +19,7 @@ import {
   addTeamApi,
   getCompetitionApi,
   getGroupApi,
-  getGroupTableApi,
+  getGroupTableApi, removeCompetitionApi,
 } from "../requests/leagues";
 
 
@@ -56,6 +56,17 @@ export function* getCompetition(action) {
     yield put({type: leaguesActions.GET_COMPETITION_REQUEST_SUCCESS, data: response.data});
   } catch (e) {
     yield put({ type: leaguesActions.GET_COMPETITION_REQUEST_FAILED, error: e.response });
+  }
+}
+
+export function* removeCompetition(action) {
+  try {
+    yield call(removeCompetitionApi, action.data);
+    const competitionsState = yield select(state => state.leagues.competitions);
+    const competitions = competitionsState.filter(item => item._id !== action.data);
+    yield put({type: leaguesActions.REMOVE_COMPETITION_REQUEST_SUCCESS, data: competitions});
+  } catch (e) {
+    yield put({ type: leaguesActions.REMOVE_COMPETITION_REQUEST_FAILED, error: e.response });
   }
 }
 
@@ -228,6 +239,7 @@ export default all([
   takeEvery(leaguesActions.GET_COMPETITIONS_REQUEST, getCompetitions),
   takeEvery(leaguesActions.ADD_TEAM_REQUEST, addTeam),
   takeEvery(leaguesActions.GET_COMPETITION_REQUEST, getCompetition),
+  takeEvery(leaguesActions.REMOVE_COMPETITION_REQUEST, removeCompetition),
   takeEvery(leaguesActions.GET_GROUP_REQUEST, getGroup),
   takeEvery(leaguesActions.GET_GROUP_TABLE_REQUEST, getGroupTable),
 

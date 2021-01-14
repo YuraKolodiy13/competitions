@@ -15,6 +15,7 @@ import TeamModal from "../../components/modals/TeamModal/TeamModal";
 const Teams = () => {
   const dispatch = useDispatch();
   const teams = useSelector(state => state.leagues.teams);
+  const user = useSelector(state => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -23,12 +24,14 @@ const Teams = () => {
 
   return (
     <div className='teams'>
-      <Button
-        type='button'
-        title='Добавити команду'
-        color='primary'
-        doAction={() => setIsModalOpen(true)}
-      />
+      {user && user.role === 'admin' && (
+        <Button
+          type='button'
+          title='Добавити команду'
+          color='primary'
+          doAction={() => setIsModalOpen(true)}
+        />
+      )}
       {teams && teams.map(item => (
         <div className='teams__item' key={item._id}>
           <Link to={`/team/${item._id}`}>{item.name}</Link>
