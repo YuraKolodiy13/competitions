@@ -43,6 +43,12 @@ export const getGroupApi = ({leagueId, groupId}) => {
   )
 };
 
+export const addGroupApi = (data) => {
+  return service.post(
+    `${api}/competitions/${data.leagueId}/groups`, data.body
+  )
+};
+
 export const getGroupTableApi = ({leagueId, groupId}) => {
   return service.get(
     `${api}/competitions/${leagueId}/groups/${groupId}/tables`,

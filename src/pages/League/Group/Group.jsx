@@ -7,7 +7,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Standings from "../Standings";
 import Matches from "../../../components/Matches/Matches";
 import TabPanel from "../../../components/TabPanel/TabPanel";
-import {Link} from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import { Bar } from 'react-chartjs-2';
 import {useParams} from "react-router-dom";

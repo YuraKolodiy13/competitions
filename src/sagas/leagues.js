@@ -19,7 +19,7 @@ import {
   addTeamApi,
   getCompetitionApi,
   getGroupApi,
-  getGroupTableApi, removeCompetitionApi, addCompetitionApi,
+  getGroupTableApi, removeCompetitionApi, addCompetitionApi, addGroupApi,
 } from "../requests/leagues";
 
 
@@ -86,6 +86,16 @@ export function* getGroup(action) {
     yield put({type: leaguesActions.GET_GROUP_REQUEST_SUCCESS, data: response.data});
   } catch (e) {
     yield put({ type: leaguesActions.GET_GROUP_REQUEST_FAILED, error: e.response });
+  }
+}
+
+export function* addGroup(action) {
+  try {
+    const response = yield call(addGroupApi, action.data);
+    if(action.callback) action.callback();
+    yield put({type: leaguesActions.ADD_GROUP_REQUEST_SUCCESS, data: response.data});
+  } catch (e) {
+    yield put({ type: leaguesActions.ADD_GROUP_REQUEST_FAILED, error: e.response });
   }
 }
 
@@ -252,6 +262,7 @@ export default all([
   takeEvery(leaguesActions.GET_COMPETITION_REQUEST, getCompetition),
   takeEvery(leaguesActions.REMOVE_COMPETITION_REQUEST, removeCompetition),
   takeEvery(leaguesActions.GET_GROUP_REQUEST, getGroup),
+  takeEvery(leaguesActions.ADD_GROUP_REQUEST, addGroup),
   takeEvery(leaguesActions.GET_GROUP_TABLE_REQUEST, getGroupTable),
 
 

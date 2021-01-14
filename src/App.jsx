@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import Teams from "./pages/Teams/Teams";
 import './assets/styles/globals.scss'
 import Group from "./pages/League/Group/Group";
+import Home from "./pages/Home/Home";
 
 const App = () => {
   return (
@@ -15,8 +16,8 @@ const App = () => {
       <Header/>
       <Layout>
         <Switch>
-          <Route path="/" component={League} exact/>
-          <Route path="/league/:id" component={League} exact />
+          <Route path="/" component={Home} exact/>
+          <Route path="/league/:leagueId" component={League} exact />
           <Route path="/league/:leagueId/groups/:id" component={Group} />
           <Route path="/teams" component={Teams} />
           <Route path="/team/:id" component={Team} />
