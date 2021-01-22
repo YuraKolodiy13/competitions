@@ -186,4 +186,61 @@ body {
   .MuiPickersDay-daySelected{
     background-color: var(--color-primary-500);
   }
+  .MuiTreeItem-label{
+    color: initial;
+    &:hover{
+      background-color: transparent;
+    }
+  }
+
+  .remove-icon{
+    color: darkred;
+    padding: 0 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: .3s;
+    &:hover{
+      font-weight: bold;
+    }
+  }
+
+  .breadcrumbs{
+    padding: 0;
+    margin: 0 0 24px;
+    list-style: none;
+    display: flex;
+    li{
+      white-space: nowrap;
+      max-width: 275px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:not(:last-of-type){
+        padding-right: 25px;
+        margin-right: 16px;
+        position: relative;
+        &::after{
+          content: '';
+          position: absolute;
+          right: 2px;
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+          border-top: 2px solid #000;
+          border-right: 2px solid #000;
+          width: 7px;
+          height: 7px;
+        }
+      }
+      a{
+        text-decoration: none;
+        color: var(--color-primary-500);
+      }
+    }
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+      li{
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+    }
+  }
 }

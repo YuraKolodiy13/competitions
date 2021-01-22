@@ -27,6 +27,18 @@ class Service {
     );
   };
 
+  patch(path, payload, callback) {
+    return this.service.request({
+      method: 'PATCH',
+      url: path,
+      responseType: 'json',
+      data: payload,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }).then(response => callback ? callback(response.status, response.data) : response);
+  }
+
   put(put, payload, callback) {
     return this.service.request({
       method: 'PUT',

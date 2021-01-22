@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getCompetitionRequest} from "../../actions/leagues";
+import {getCompetitionRequest, removeGroupRequest} from "../../actions/leagues";
 import './League.scss'
 import {Link, useParams} from "react-router-dom";
 import Button from "../../components/buttons/Button/Button";
@@ -17,15 +17,25 @@ const League = (props) => {
     dispatch(getCompetitionRequest(leagueId));
   }, [leagueId]); // eslint-disable-line
 
+  const removeGroup = (e, groupId) => {
+    e.preventDefault();
+    dispatch(removeGroupRequest({leagueId, groupId}))
+  };
 
   return (
     <div className='home'>
+      <ul className='breadcrumbs'>
+        <li><Link to='/'>Home</Link></li>
+        <li>Ліга: {competition.name}</li>
+      </ul>
       <h1>{competition.name}</h1>
-
       <ul>
         {competition.groups && competition.groups.map(item =>
           <li key={item._id}>
             <Link to={`/league/${competition._id}/groups/${item._id}`}>{item.name}</Link>
+            {user && user.role === 'admin' && (
+              <span className='remove-icon' onClick={(e) => removeGroup(e, item._id)}>x</span>
+            )}
           </li>
         )}
       </ul>

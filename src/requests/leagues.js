@@ -26,6 +26,11 @@ export const addCompetitionApi = (data) => {
     `${api}/competitions`, data
   )
 };
+export const editCompetitionApi = (data) => {
+  return service.patch(
+    `${api}/competitions/${data.leagueId}`, data.body
+  )
+};
 export const getCompetitionApi = (id) => {
   return service.get(
     `${api}/competitions/${id}`,
@@ -49,9 +54,21 @@ export const addGroupApi = (data) => {
   )
 };
 
+export const removeGroupApi = ({leagueId, groupId}) => {
+  return service.delete(
+    `${api}/competitions/${leagueId}/groups/${groupId}`,
+  )
+};
+
 export const getGroupTableApi = ({leagueId, groupId}) => {
   return service.get(
-    `${api}/competitions/${leagueId}/groups/${groupId}/tables`,
+    `${api}/competitions/${leagueId}/groups/${groupId}/table`,
+  )
+};
+
+export const addGameApi = (data) => {
+  return service.post(
+    `${api}/competitions/${data.leagueId}/groups/${data.groupId}/games`, data.body
   )
 };
 

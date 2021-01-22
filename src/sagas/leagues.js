@@ -19,7 +19,13 @@ import {
   addTeamApi,
   getCompetitionApi,
   getGroupApi,
-  getGroupTableApi, removeCompetitionApi, addCompetitionApi, addGroupApi,
+  getGroupTableApi,
+  removeCompetitionApi,
+  addCompetitionApi,
+  addGroupApi,
+  addGameApi,
+  removeGroupApi,
+  editCompetitionApi,
 } from "../requests/leagues";
 
 
@@ -57,6 +63,16 @@ export function* addCompetition(action) {
     yield put({type: leaguesActions.ADD_COMPETITION_REQUEST_SUCCESS, data: response.data});
   } catch (e) {
     yield put({ type: leaguesActions.ADD_COMPETITION_REQUEST_FAILED, error: e.response });
+  }
+}
+export function* editCompetition(action) {
+  try {
+    console.log(action, 'action')
+    const response = yield call(editCompetitionApi, action.data);
+    if(action.callback) action.callback(false);
+    yield put({type: leaguesActions.EDIT_COMPETITION_REQUEST_SUCCESS, data: response.data});
+  } catch (e) {
+    yield put({ type: leaguesActions.EDIT_COMPETITION_REQUEST_FAILED, error: e.response });
   }
 }
 
@@ -99,6 +115,20 @@ export function* addGroup(action) {
   }
 }
 
+export function* removeGroup(action) {
+  try {
+    yield call(removeGroupApi, action.data);
+    const competitionState = yield select(state => state.leagues.competition);
+    const competition = {
+      ...competitionState,
+      groups: competitionState.groups.filter(item => item._id !== action.data.groupId)
+    };
+    yield put({type: leaguesActions.REMOVE_GROUP_REQUEST_SUCCESS, data: competition});
+  } catch (e) {
+    yield put({ type: leaguesActions.REMOVE_GROUP_REQUEST_FAILED, error: e.response });
+  }
+}
+
 export function* getGroupTable(action) {
   try {
     const response = yield call(getGroupTableApi, action.data);
@@ -108,6 +138,15 @@ export function* getGroupTable(action) {
   }
 }
 
+export function* addGame(action) {
+  try {
+    const response = yield call(addGameApi, action.data);
+    if(action.callback) action.callback();
+    yield put({type: leaguesActions.ADD_GAME_REQUEST_SUCCESS, data: response.data});
+  } catch (e) {
+    yield put({ type: leaguesActions.ADD_GAME_REQUEST_FAILED, error: e.response });
+  }
+}
 
 
 
@@ -259,11 +298,14 @@ export default all([
   takeEvery(leaguesActions.GET_COMPETITIONS_REQUEST, getCompetitions),
   takeEvery(leaguesActions.ADD_TEAM_REQUEST, addTeam),
   takeEvery(leaguesActions.ADD_COMPETITION_REQUEST, addCompetition),
+  takeEvery(leaguesActions.EDIT_COMPETITION_REQUEST, editCompetition),
   takeEvery(leaguesActions.GET_COMPETITION_REQUEST, getCompetition),
   takeEvery(leaguesActions.REMOVE_COMPETITION_REQUEST, removeCompetition),
   takeEvery(leaguesActions.GET_GROUP_REQUEST, getGroup),
   takeEvery(leaguesActions.ADD_GROUP_REQUEST, addGroup),
+  takeEvery(leaguesActions.REMOVE_GROUP_REQUEST, removeGroup),
   takeEvery(leaguesActions.GET_GROUP_TABLE_REQUEST, getGroupTable),
+  takeEvery(leaguesActions.ADD_GAME_REQUEST, addGame),
 
 
   takeEvery(leaguesActions.GET_TEAMS_REQUEST, getTeams),

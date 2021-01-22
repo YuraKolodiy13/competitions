@@ -31,7 +31,6 @@ const GroupModal = ({title, open, setIsModalOpen, team, leagueId}) => {
     if(team){
       // dispatch(editTaskRequest(data, setIsModalOpen));
     }else {
-      console.log({body: state, leagueId});
       dispatch(addGroupRequest({body: state, leagueId}, closeModal))
     }
   };

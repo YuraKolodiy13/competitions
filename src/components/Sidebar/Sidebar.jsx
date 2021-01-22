@@ -7,6 +7,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import Button from "../buttons/Button/Button";
 import CompetitionModal from "../modals/CompetitionModal/CompetitionModal";
+import ActionButton from "../buttons/ActionButton/ActionButton";
 
 const Sidebar = () => {
 
@@ -14,6 +15,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [competition, setCompetition] = useState({});
 
   useEffect(() => {
     dispatch(getCompetitionsRequest());
@@ -24,6 +26,11 @@ const Sidebar = () => {
     dispatch(removeCompetitionRequest(id))
   };
 
+  const toggleModal = (competition) => {
+    setCompetition(competition);
+    setIsModalOpen(true);
+  };
+
   const treeTableWrapper = (taskTree) => {
     return taskTree && taskTree.map((item, index) => {
       return (
@@ -31,9 +38,15 @@ const Sidebar = () => {
           <TreeItem
             nodeId={index.toString()}
             label={
-              <div>
+              <div className='league-name'>
                 <Link to={`/league/${item._id}`}>{item.name}</Link>
-                <span onClick={(e) => removeCompetition(e, item._id)}> x</span>
+                {user && user.role === 'admin' && (
+                  <>
+                    <ActionButton edit doAction={() => toggleModal(item)}/>
+                    <ActionButton remove doAction={(e) => removeCompetition(e, item._id)}/>
+                  </>
+                  // <span className='remove-icon' onClick={(e) => removeCompetition(e, item._id)}>x</span>
+                )}
               </div>
             }
             // style={{backgroundImage: `url(${item.logo})`}}
@@ -80,9 +93,9 @@ const Sidebar = () => {
       )}
 
       <CompetitionModal
-        title='Нове змагання'
         open={isModalOpen}
         setIsModalOpen={() => setIsModalOpen(false)}
+        competition={competition}
       />
     </div>
   )

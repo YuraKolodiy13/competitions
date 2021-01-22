@@ -9,21 +9,27 @@ import Matches from "../../../components/Matches/Matches";
 import TabPanel from "../../../components/TabPanel/TabPanel";
 import Loader from "../../../components/Loader/Loader";
 import { Bar } from 'react-chartjs-2';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import GameModal from "../../../components/modals/GameModal/GameModal";
+import Button from "../../../components/buttons/Button/Button";
 
 const Group = (props) => {
   const dispatch = useDispatch();
-  const {leagueId} = useParams();
+  const {leagueId, groupId} = useParams();
   const table = useSelector(state => state.leagues.table);
+  const competitions = useSelector(state => state.leagues.competitions);
   const scorers = useSelector(state => state.leagues.scorers);
   const schedule = useSelector(state => state.leagues.schedule);
   const loading = useSelector(state => state.leagues.loading);
   const group = useSelector(state => state.leagues.group);
   const [value, setValue] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useSelector(state => state.auth.user);
+  const competiton = !!competitions.length && competitions.find(item => item._id === leagueId);
 
   useEffect(() => {
-    dispatch(getGroupRequest({leagueId, groupId: props.match.params.id}));
-    dispatch(getGroupTableRequest({leagueId, groupId: props.match.params.id}));
+    dispatch(getGroupRequest({leagueId, groupId: props.match.params.groupId}));
+    dispatch(getGroupTableRequest({leagueId, groupId: props.match.params.groupId}));
     // dispatch(getScorersRequest(props.match.params.id));
   }, [props.match.params.id]); // eslint-disable-line
 
@@ -72,10 +78,14 @@ const Group = (props) => {
 
   return (
     <div className='home'>
-
       {loading
         ? <Loader/>
         : <>
+          <ul className='breadcrumbs'>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to={`/league/${competiton._id}`}>Ліга: {competiton.name}</Link></li>
+            <li>Група: {group.name}</li>
+          </ul>
           <h1>{group.name}</h1>
             <Tabs
               value={value}
@@ -113,6 +123,23 @@ const Group = (props) => {
               </>
               : <p>no info about this league</p>
             }
+
+          {user && user.role === 'admin' && (
+            <Button
+              type='button'
+              title='Добавити ігру'
+              color='primary'
+              doAction={() => setIsModalOpen(true)}
+            />
+          )}
+
+          <GameModal
+            title='Нова група'
+            open={isModalOpen}
+            setIsModalOpen={() => setIsModalOpen(false)}
+            leagueId={leagueId}
+            groupId={groupId}
+          />
           </>
       }
     </div>

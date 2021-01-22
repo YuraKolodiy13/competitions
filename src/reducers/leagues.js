@@ -23,7 +23,7 @@ import {
   GET_COMPETITION_REQUEST_SUCCESS,
   GET_GROUP_REQUEST_SUCCESS,
   REMOVE_COMPETITION_REQUEST_SUCCESS,
-  ADD_COMPETITION_REQUEST_SUCCESS
+  ADD_COMPETITION_REQUEST_SUCCESS, REMOVE_GROUP_REQUEST_SUCCESS
 } from "../actions/leagues";
 
 const initialState = {
@@ -97,6 +97,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         competitions: [...state.competitions, action.data.data]
+      };
+    case REMOVE_GROUP_REQUEST_SUCCESS:
+      return {
+        ...state,
+        competition: action.data
       };
 
 

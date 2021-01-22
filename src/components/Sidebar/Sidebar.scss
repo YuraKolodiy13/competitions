@@ -11,7 +11,7 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      padding-left: 25px;
+      //padding-left: 25px;
     }
   }
   li{
@@ -36,5 +36,10 @@
     //  background-repeat: no-repeat;
     //  margin-right: 5px;
     //}
+  }
+  .league-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
