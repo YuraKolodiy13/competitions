@@ -1,40 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import {useDispatch} from "react-redux";
-import {addGameRequest} from "../../../actions/leagues";
+import {useDispatch, useSelector} from "react-redux";
+import {addGameRequest, getTeamsRequest} from "../../../actions/leagues";
 import {ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
 import Button from "../../buttons/Button/Button";
 import Slide from "@material-ui/core/Slide";
 import MenuItem from "@material-ui/core/MenuItem";
 import DatePicker from "../../DatePicker/DatePicker";
 import {getFullDate} from "../../../helpers/utils";
-const GameModal = ({title, open, setIsModalOpen, team, leagueId, groupId}) => {
+
+const GameModal = ({title, open, setIsModalOpen, game, leagueId, groupId}) => {
   const dispatch = useDispatch();
 
   const initialState = {
     status: '',
     homeTeam: '',
     awayTeam: '',
+    referees: ['5fea02df1052b962df9d77e7'],
+    matchDay: '',
     startDate: new Date(),
     utcDate: new Date(),
+    fullTime: {
+      homeTeam: '',
+      awayTeam: '',
+    },
   };
 
-  const [state, setState] = useState(team || initialState);
+  const [state, setState] = useState(game || initialState);
+  const teams = useSelector(state => state.leagues.teams);
 
   useEffect(() => {
-    if(team) setState(team);
-  },[team]);
+    if(game) setState(game);
+    dispatch(getTeamsRequest())
+  },[game]);
 
   const closeModal = () => {
     setIsModalOpen(false);
-    if(team) setState(team);
+    if(game) setState(game);
     else setState(initialState);
   };
 
   const createTeam = () => {
 
-    if(team){
+    if(game){
       // dispatch(editTaskRequest(data, setIsModalOpen));
     }else {
       dispatch(addGameRequest({body: state, leagueId, groupId}, closeModal))
@@ -95,6 +104,21 @@ const GameModal = ({title, open, setIsModalOpen, team, leagueId, groupId}) => {
               </div>
               <div className="modal__field">
                 <TextValidator
+                  value={state.referees}
+                  name='referees'
+                  type="text"
+                  label='Суддя'
+                  variant="outlined"
+                  // onChange={onHandleChange}
+                  // validators={['required']}
+                  // errorMessages={['Обовязкове поле']}
+                  disabled
+                />
+              </div>
+            </div>
+            <div className="modal__row">
+              <div className="modal__field">
+                <SelectValidator
                   value={state.homeTeam}
                   name='homeTeam'
                   type="text"
@@ -103,12 +127,26 @@ const GameModal = ({title, open, setIsModalOpen, team, leagueId, groupId}) => {
                   onChange={onHandleChange}
                   validators={['required']}
                   errorMessages={['Обовязкове поле']}
-                />
+                  SelectProps={{
+                    MenuProps: {
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      transformOrigin: {
+                        vertical: "top",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null}
+                  }}
+                >
+                  {teams.map(item =>
+                    <MenuItem key={item._id} value={item._id}>{item.name}</MenuItem>
+                  )}
+                </SelectValidator>
               </div>
-            </div>
-            <div className="modal__row">
               <div className="modal__field">
-                <TextValidator
+                <SelectValidator
                   value={state.awayTeam}
                   name='awayTeam'
                   type="text"
@@ -117,8 +155,52 @@ const GameModal = ({title, open, setIsModalOpen, team, leagueId, groupId}) => {
                   onChange={onHandleChange}
                   validators={['required']}
                   errorMessages={['Обовязкове поле']}
+                  SelectProps={{
+                    MenuProps: {
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      transformOrigin: {
+                        vertical: "top",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null}
+                  }}
+                >
+                  {teams.map(item =>
+                    <MenuItem key={item._id} value={item._id}>{item.name}</MenuItem>
+                  )}
+                </SelectValidator>
+              </div>
+            </div>
+            <div className="modal__row">
+              <div className="modal__field">
+                <TextValidator
+                  value={state.fullTime.homeTeam}
+                  name='homeTeam'
+                  type="text"
+                  label='Голи господарів'
+                  variant="outlined"
+                  onChange={e => setState({...state, fullTime: {...state.fullTime, homeTeam: +e.target.value}})}
+                  validators={['required']}
+                  errorMessages={['Обовязкове поле']}
                 />
               </div>
+              <div className="modal__field">
+                <TextValidator
+                  value={state.fullTime.awayTeam}
+                  name='awayTeam'
+                  type="text"
+                  label='Голи гостів'
+                  variant="outlined"
+                  onChange={e => setState({...state, fullTime: {...state.fullTime, awayTeam: +e.target.value}})}
+                  validators={['required']}
+                  errorMessages={['Обовязкове поле']}
+                />
+              </div>
+            </div>
+            <div className="modal__row">
               <div className="modal__field">
                 <DatePicker
                   selected={state.startDate}
@@ -126,6 +208,18 @@ const GameModal = ({title, open, setIsModalOpen, team, leagueId, groupId}) => {
                   label='Початок гри'
                   onChange={changeStartDate}
                   format="yyyy/MM/dd"
+                  validators={['required']}
+                  errorMessages={['Обовязкове поле']}
+                />
+              </div>
+              <div className="modal__field">
+                <TextValidator
+                  value={state.matchDay}
+                  name='matchDay'
+                  type="text"
+                  label='Тур'
+                  variant="outlined"
+                  onChange={e => setState({...state, matchDay: +e.target.value})}
                   validators={['required']}
                   errorMessages={['Обовязкове поле']}
                 />
